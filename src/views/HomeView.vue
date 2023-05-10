@@ -1,9 +1,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
+import WeatherCard from '@/components/WeatherCard.vue'
 
-export default defineComponent({})
+export default defineComponent({
+  components: { WeatherCard }
+})
 </script>
 
 <template>
-  <div>Hello from home</div>
+  <div class="wrapper">
+    <WeatherCard />
+  </div>
 </template>
