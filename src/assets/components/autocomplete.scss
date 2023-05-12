@@ -1,0 +1,64 @@
+.autocomplete {
+  display: flex;
+  gap: 15px;
+
+  &-container {
+    position: relative;
+  }
+
+  &-options {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    top: 30px;
+    left: 0;
+
+    width: 100%;
+
+    border: 1px solid $color-gray-light;
+
+    &.is-active {
+      display: flex;
+    }
+
+    &-item {
+      padding: 5px 10px;
+      cursor: pointer;
+
+      transition: background-color 250ms;
+
+      &:hover {
+        background-color: $color-gray-light;
+      }
+
+      &:not(:last-child) {
+        border-bottom: 1px solid $color-gray-light;
+      }
+    }
+  }
+
+  &-input {
+    padding: 5px 10px;
+    border: 1px solid $color-grey-dark;
+    border-radius: 6px;
+    outline: none;
+
+    font: inherit;
+  }
+
+  button[type="submit"] {
+    align-items: center;
+
+    width: 50px;
+    height: 30px;
+
+    cursor: pointer;
+
+    &:disabled {
+      background-color: $color-gray-light;
+      border-color: $color-grey-dark;
+      cursor: default;
+      color: $color-grey-dark;
+      }
+    }
+}

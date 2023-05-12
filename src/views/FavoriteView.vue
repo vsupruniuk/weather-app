@@ -1,19 +1,21 @@
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
+import { useFavoriteCitiesStore } from '@/stores/favoriteCity';
 
 export default defineComponent({
-  data() {
-    return {
-      envVar: import.meta.env.VITE_TEST || ''
-    }
+  setup() {
+    const favoriteCities = useFavoriteCitiesStore();
+
+    return { favoriteCities };
   }
-})
+});
 </script>
 
 <template>
-  <div>Hello from favorite</div>
-  <div v-if="envVar">{{ envVar }}</div>
-  <div v-else>No env var</div>
+  <h1>{{ favoriteCities.favoriteCities.length }}</h1>
+  <div v-for="city of favoriteCities.favoriteCities" :key="city.id">
+    {{ city.name }}, {{ city.country }}, {{ `${city.isFavorite}` }}
+  </div>
 </template>
 
 <style></style>
