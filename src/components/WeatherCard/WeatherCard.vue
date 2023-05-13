@@ -7,12 +7,11 @@ import WeatherInfo from '@/components/WeatherCard/WeatherInfo.vue';
 import { getWeather } from '@/api/getWeather';
 import { separateWeatherByDays } from '@/helpers/separateWeatherByDays';
 import type { IWeatherItem } from '@/types/Weather';
-import WeatherTemperatureGraphic from '@/components/WeatherCard/WeatherTemperatureGraphic.vue';
 
 export default defineComponent({
   name: 'WeatherCard',
-  components: { WeatherTemperatureGraphic, WeatherInfo, WeatherCardHeader },
-  emits: ['toggleFavorites'],
+  components: { WeatherInfo, WeatherCardHeader },
+  emits: ['toggleFavorites', 'deleteCard', 'openFavoriteLimitModal'],
   setup() {
     const favoriteCities = useFavoriteCitiesStore();
 
@@ -26,20 +25,20 @@ export default defineComponent({
   props: {
     city: { type: Object as PropType<ICity>, required: true }
   },
-  // mounted() {
-  //   const { city } = this;
-  //
-  //   getWeather(city.lat, city.lon)
-  //     .then((data) => (this.weather = separateWeatherByDays(data.data)))
-  //     .catch(() => (this.weather = [[]]));
-  // },
-  // updated() {
-  //   const { city } = this;
-  //
-  //   getWeather(city.lat, city.lon)
-  //     .then((data) => (this.weather = separateWeatherByDays(data.data)))
-  //     .catch(() => (this.weather = [[]]));
-  // },
+  mounted() {
+    const { city } = this;
+
+    getWeather(city.lat, city.lon)
+      .then((data) => (this.weather = separateWeatherByDays(data.data)))
+      .catch(() => (this.weather = [[]]));
+  },
+  updated() {
+    const { city } = this;
+
+    getWeather(city.lat, city.lon)
+      .then((data) => (this.weather = separateWeatherByDays(data.data)))
+      .catch(() => (this.weather = [[]]));
+  },
   computed: {
     cityName(): string {
       const { city } = this;
@@ -50,6 +49,12 @@ export default defineComponent({
   methods: {
     addToFavorite() {
       if (this.city.isFavorite) {
+        return;
+      }
+
+      if (this.favoriteCities.favoriteCities.length >= 5) {
+        this.$emit('openFavoriteLimitModal');
+
         return;
       }
 
@@ -69,10 +74,10 @@ export default defineComponent({
       @addFavorite="addToFavorite"
     />
 
-    <!--    <WeatherInfo :weather="weather" />-->
+    <WeatherInfo :weather="weather" />
 
     <div class="weather-card-delete">
-      <button>
+      <button @click="$emit('deleteCard', city.id)">
         <img src="src/img/trash.svg" alt="delete" />
       </button>
     </div>

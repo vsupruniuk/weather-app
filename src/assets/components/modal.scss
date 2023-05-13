@@ -1,0 +1,76 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  backdrop-filter: blur(3px);
+  background-color: rgba(86, 85, 85, 0.35);
+
+  &-card {
+    width: 90%;
+    max-width: 700px;
+
+    border: 2px solid $color-grey-dark;
+    border-radius: 6px;
+    background-color: $color-white;
+  }
+
+  &-header {
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+
+    border-bottom: 1px solid $color-grey-dark;
+  }
+
+  &-body {
+    padding: 10px;
+
+    &-title {
+      margin-bottom: 50px;
+    }
+  }
+
+  &-confirmation {
+    &-buttons {
+      display: flex;
+      justify-content: space-evenly;
+
+      @include tablet {
+        justify-content: center;
+        gap: 50px;
+      }
+
+      @include desktop {
+        gap: 75px;
+      }
+    }
+
+    &-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &-close-btn {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+
+    transition: transform 200ms;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}

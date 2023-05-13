@@ -4,7 +4,7 @@
 
   width: 100%;
   padding: 10px;
-  margin-bottom: 25px;
+  margin-bottom: 50px;
 
   border: 1px solid $color-gray-light;
   box-shadow:
@@ -14,6 +14,10 @@
 
   @include tablet {
     padding: 10px 15px;
+  }
+
+  &:last-child {
+    margin-bottom: 25px;
   }
 
   .card-header {

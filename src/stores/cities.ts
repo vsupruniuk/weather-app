@@ -35,6 +35,13 @@ export const useSelectedCitiesStore = defineStore('selectedCities', {
       this.cities = newCities;
 
       localStorage.setItem('selectedCities', JSON.stringify(newCities));
+    },
+    deleteCityById(id: string) {
+      const newCities = this.cities.filter((city) => city.id !== id);
+
+      this.cities = newCities;
+
+      localStorage.setItem('selectedCities', JSON.stringify(newCities));
     }
   }
 });

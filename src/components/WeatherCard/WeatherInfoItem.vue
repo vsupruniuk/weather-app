@@ -75,7 +75,7 @@ export default defineComponent({
 
     <WeatherDetails :weather-item="dayMode === 'day' ? daysWeather : nightsWeather" />
 
-    <WeatherTemperatureGraphic :weather-item="dayMode === 'day' ? daysWeather : nightsWeather" />
+    <WeatherTemperatureGraphic :weather-item="weatherItem" />
   </div>
 </template>
 
