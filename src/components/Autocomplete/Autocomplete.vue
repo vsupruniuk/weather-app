@@ -21,14 +21,14 @@ export default defineComponent({
     return {
       inputValue: '',
       foundedCities: [] as ICity[],
-      debouncedFetchData: () => {}
+      debouncedFetchData: debounce(this.fetchData, 500)
     };
   },
   methods: {
     async fetchData() {
       if (this.inputValue.length) {
         try {
-          const data = await searchCities<ICity[]>(this.inputValue);
+          const data = await searchCities(this.inputValue);
 
           this.foundedCities = data.data;
         } catch (err) {
@@ -43,9 +43,6 @@ export default defineComponent({
       this.inputValue = '';
       this.foundedCities = [];
     }
-  },
-  mounted() {
-    this.debouncedFetchData = debounce(this.fetchData, 500);
   }
 });
 </script>
@@ -63,7 +60,7 @@ export default defineComponent({
 
       <AutocompleteOptions
         :founded-cities="foundedCities"
-        :is-active="foundedCities.length > 0"
+        :is-active="foundedCities.length > 0 || inputValue.length > 0"
         @selectCity="replaceCity($event)"
       />
     </div>

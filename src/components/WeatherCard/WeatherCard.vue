@@ -3,19 +3,43 @@ import { defineComponent, PropType } from 'vue';
 import WeatherCardHeader from '@/components/WeatherCard/WeatherCardHeader.vue';
 import type { ICity } from '@/types/City';
 import { useFavoriteCitiesStore } from '@/stores/favoriteCity';
+import WeatherInfo from '@/components/WeatherCard/WeatherInfo.vue';
+import { getWeather } from '@/api/getWeather';
+import { separateWeatherByDays } from '@/helpers/separateWeatherByDays';
+import type { IWeatherItem } from '@/types/Weather';
+import WeatherTemperatureGraphic from '@/components/WeatherCard/WeatherTemperatureGraphic.vue';
 
 export default defineComponent({
   name: 'WeatherCard',
-  components: { WeatherCardHeader },
+  components: { WeatherTemperatureGraphic, WeatherInfo, WeatherCardHeader },
   emits: ['toggleFavorites'],
   setup() {
     const favoriteCities = useFavoriteCitiesStore();
 
     return { favoriteCities };
   },
+  data() {
+    return {
+      weather: [] as IWeatherItem[][]
+    };
+  },
   props: {
     city: { type: Object as PropType<ICity>, required: true }
   },
+  // mounted() {
+  //   const { city } = this;
+  //
+  //   getWeather(city.lat, city.lon)
+  //     .then((data) => (this.weather = separateWeatherByDays(data.data)))
+  //     .catch(() => (this.weather = [[]]));
+  // },
+  // updated() {
+  //   const { city } = this;
+  //
+  //   getWeather(city.lat, city.lon)
+  //     .then((data) => (this.weather = separateWeatherByDays(data.data)))
+  //     .catch(() => (this.weather = [[]]));
+  // },
   computed: {
     cityName(): string {
       const { city } = this;
@@ -44,6 +68,14 @@ export default defineComponent({
       :cityId="city.id"
       @addFavorite="addToFavorite"
     />
+
+    <!--    <WeatherInfo :weather="weather" />-->
+
+    <div class="weather-card-delete">
+      <button>
+        <img src="src/img/trash.svg" alt="delete" />
+      </button>
+    </div>
   </div>
 </template>
 

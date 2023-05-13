@@ -24,6 +24,7 @@
     &-item {
       padding: 5px 10px;
       cursor: pointer;
+      background-color: $color-white;
 
       transition: background-color 250ms;
 
@@ -35,6 +36,11 @@
         border-bottom: 1px solid $color-gray-light;
       }
     }
+
+    &-empty {
+      padding: 5px 10px;
+      background-color: $color-white;
+    }
   }
 
   &-input {
@@ -45,20 +51,4 @@
 
     font: inherit;
   }
-
-  button[type="submit"] {
-    align-items: center;
-
-    width: 50px;
-    height: 30px;
-
-    cursor: pointer;
-
-    &:disabled {
-      background-color: $color-gray-light;
-      border-color: $color-grey-dark;
-      cursor: default;
-      color: $color-grey-dark;
-      }
-    }
 }

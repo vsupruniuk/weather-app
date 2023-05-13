@@ -14,7 +14,9 @@ export default defineComponent({
 
 <template>
   <div class="autocomplete-options" :class="{ 'is-active': isActive }">
+    <div v-if="!foundedCities.length" class="autocomplete-options-empty">No results</div>
     <div
+      v-else
       v-for="city of foundedCities"
       :key="`${city.lon}${city.lat}`"
       @click="$emit('selectCity', city)"

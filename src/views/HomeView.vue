@@ -7,6 +7,8 @@ import { getCityByIP } from '@/api/getCityByIP';
 import { v4 as uuidv4 } from 'uuid';
 import { cityMock } from '@/mocks/city';
 
+// TODO skeleton loaders
+
 export default defineComponent({
   components: { WeatherCard },
   setup() {
@@ -49,8 +51,29 @@ export default defineComponent({
           });
         })
         .finally(() => {
-          console.log(selectedCities.length);
           this.cities.addCities(selectedCities);
+        });
+    }
+  },
+  methods: {
+    addCity() {
+      getCityByIP()
+        .then(({ data }: { data: ICityByIP }) => {
+          this.cities.addCity({
+            name: data.city,
+            id: uuidv4(),
+            local_names: {},
+            lat: data.latitude,
+            lon: data.longitude,
+            country: data.country,
+            isFavorite: false
+          });
+        })
+        .catch((err) => {
+          this.cities.addCity({
+            ...cityMock,
+            id: uuidv4()
+          });
         });
     }
   }
@@ -65,5 +88,11 @@ export default defineComponent({
       :city="city"
       @toggleFavorites="cities.toggleFavorite($event)"
     />
+
+    <div v-if="cities.cities.length < 5" class="add-button" @click="addCity">
+      <button class="btn">
+        <img src="src/img/plus.svg" alt="add" />
+      </button>
+    </div>
   </div>
 </template>
