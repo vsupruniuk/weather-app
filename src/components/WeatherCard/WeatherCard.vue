@@ -32,13 +32,6 @@ export default defineComponent({
       .then((data) => (this.weather = separateWeatherByDays(data.data)))
       .catch(() => (this.weather = [[]]));
   },
-  updated() {
-    const { city } = this;
-
-    getWeather(city.lat, city.lon)
-      .then((data) => (this.weather = separateWeatherByDays(data.data)))
-      .catch(() => (this.weather = [[]]));
-  },
   computed: {
     cityName(): string {
       const { city } = this;
@@ -47,6 +40,11 @@ export default defineComponent({
     }
   },
   methods: {
+    reloadWeather(city: ICity) {
+      getWeather(city.lat, city.lon)
+        .then((data) => (this.weather = separateWeatherByDays(data.data)))
+        .catch(() => (this.weather = [[]]));
+    },
     addToFavorite() {
       if (this.city.isFavorite) {
         return;
@@ -72,6 +70,7 @@ export default defineComponent({
       :isFavorite="city.isFavorite"
       :cityId="city.id"
       @addFavorite="addToFavorite"
+      @reload-weather="reloadWeather($event)"
     />
 
     <WeatherInfo :weather="weather" />

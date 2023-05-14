@@ -19,7 +19,7 @@ export default defineComponent({
   mounted() {
     const ctx = this.$refs.chart;
 
-    new Chart(ctx, {
+    this.chart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: this.labels,

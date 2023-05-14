@@ -9,6 +9,7 @@ import { useSelectedCitiesStore } from '@/stores/cities';
 export default defineComponent({
   name: 'AutocompleteInput',
   components: { AutocompleteOptions },
+  emits: ['reloadWeather'],
   props: {
     cityId: { type: String, required: true }
   },
@@ -42,6 +43,7 @@ export default defineComponent({
       this.cities.replaceCityById(this.cityId, event);
       this.inputValue = '';
       this.foundedCities = [];
+      this.$emit('reloadWeather', event);
     }
   }
 });

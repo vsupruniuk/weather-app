@@ -5,7 +5,7 @@ import AutocompleteInput from '@/components/Autocomplete/Autocomplete.vue';
 export default defineComponent({
   name: 'WeatherCardHeader',
   components: { AutocompleteInput },
-  emits: ['addFavorite'],
+  emits: ['addFavorite', 'reload-weather'],
   props: {
     cityName: { type: String, required: true },
     isFavorite: { type: Boolean, required: true },
@@ -29,7 +29,7 @@ export default defineComponent({
       </button>
     </div>
 
-    <AutocompleteInput :cityId="cityId" />
+    <AutocompleteInput :cityId="cityId" @reload-weather="$emit('reload-weather', $event)" />
   </div>
 </template>
 

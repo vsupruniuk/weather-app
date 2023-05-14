@@ -8,9 +8,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { cityMock } from '@/mocks/city';
 import DeletingModal from '@/components/Modals/DeletingModal.vue';
 import FavoriteLimitModal from '@/components/Modals/FavoriteLimitModal.vue';
+import WeatherCardPreloader from '@/components/Preloaders/WeatherCardPreloader.vue';
 
 export default defineComponent({
-  components: { FavoriteLimitModal, DeletingModal, WeatherCard },
+  components: { WeatherCardPreloader, FavoriteLimitModal, DeletingModal, WeatherCard },
   setup() {
     const cities = useSelectedCitiesStore();
 
@@ -20,13 +21,16 @@ export default defineComponent({
     return {
       isDeletingModalActive: false,
       isFavoriteLimitModalActive: false,
+      isCitiesLoading: false,
       cityIdToDelete: ''
     };
   },
-  beforeMount() {
+  mounted() {
     if (this.cities.cities.length) {
       return;
     }
+
+    this.isCitiesLoading = true;
 
     let selectedCities: ICity[];
 
@@ -38,6 +42,7 @@ export default defineComponent({
 
     if (selectedCities.length) {
       this.cities.addCities(selectedCities);
+      this.isCitiesLoading = false;
     } else {
       getCityByIP()
         .then(({ data }: { data: ICityByIP }) => {
@@ -59,6 +64,7 @@ export default defineComponent({
         })
         .finally(() => {
           this.cities.addCities(selectedCities);
+          this.isCitiesLoading = false;
         });
     }
   },
@@ -102,28 +108,32 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="wrapper" @scroll="() => false">
-    <WeatherCard
-      v-for="city of cities.cities"
-      :key="city.id"
-      :city="city"
-      @toggleFavorites="cities.toggleFavorite($event)"
-      @delete-card="prepareToDeletingCity($event)"
-      @open-favorite-limit-modal="isFavoriteLimitModalActive = true"
-    />
+  <div class="wrapper">
+    <WeatherCardPreloader v-if="isCitiesLoading" />
 
-    <div v-if="cities.cities.length < 5" class="add-button" @click="addCity">
-      <button class="btn">
-        <img src="src/img/plus.svg" alt="add" />
-      </button>
-    </div>
+    <template v-else>
+      <WeatherCard
+        v-for="city of cities.cities"
+        :key="city.id"
+        :city="city"
+        @toggleFavorites="cities.toggleFavorite($event)"
+        @delete-card="prepareToDeletingCity($event)"
+        @open-favorite-limit-modal="isFavoriteLimitModalActive = true"
+      />
 
-    <DeletingModal
-      v-if="isDeletingModalActive"
-      @close-modal="closeModal"
-      @confirm-delete="deleteSelectedCity"
-    />
+      <div v-if="cities.cities.length < 5" class="add-button" @click="addCity">
+        <button class="btn">
+          <img src="src/img/plus.svg" alt="add" />
+        </button>
+      </div>
 
-    <FavoriteLimitModal v-if="isFavoriteLimitModalActive" @close-modal="closeModal" />
+      <DeletingModal
+        v-if="isDeletingModalActive"
+        @close-modal="closeModal"
+        @confirm-delete="deleteSelectedCity"
+      />
+
+      <FavoriteLimitModal v-if="isFavoriteLimitModalActive" @close-modal="closeModal" />
+    </template>
   </div>
 </template>

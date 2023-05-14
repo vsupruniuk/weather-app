@@ -3,10 +3,11 @@ import { defineComponent, PropType } from 'vue';
 import type { IWeatherItem } from '@/types/Weather';
 import WeatherInfoControl from '@/components/WeatherCard/WeatherInfoControl.vue';
 import WeatherInfoItem from '@/components/WeatherCard/WeatherInfoItem.vue';
+import WeatherInfoPreloader from '@/components/Preloaders/WeatherInfoPreloader.vue';
 
 export default defineComponent({
   name: 'WeatherInfo',
-  components: { WeatherInfoItem, WeatherInfoControl },
+  components: { WeatherInfoPreloader, WeatherInfoItem, WeatherInfoControl },
   props: {
     weather: { type: Object as PropType<IWeatherItem[][]>, required: true }
   },
@@ -20,7 +21,7 @@ export default defineComponent({
 
 <template>
   <div class="weather-info">
-    <div v-if="!weather.length">Loading</div>
+    <WeatherInfoPreloader v-if="!weather.length" />
 
     <template v-else>
       <WeatherInfoControl :mode="mode" @changeMode="this.mode = $event" />
