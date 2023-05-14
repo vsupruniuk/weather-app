@@ -27,6 +27,15 @@ export const useSelectedCitiesStore = defineStore('selectedCities', {
 
       localStorage.setItem('selectedCities', JSON.stringify(toggledCities));
     },
+    untoggleFavorite(id: string): void {
+      const toggledCities = this.cities.map((city) => {
+        return city.id === id ? { ...city, isFavorite: false } : city;
+      });
+
+      this.cities = toggledCities;
+
+      localStorage.setItem('selectedCities', JSON.stringify(toggledCities));
+    },
     replaceCityById(id: string, newCity: ICity): void {
       const newCities = this.cities.map((city) => {
         return city.id === id ? { ...newCity, id, isFavorite: false } : city;

@@ -20,7 +20,7 @@ export default defineComponent({
 
       <div class="modal-body">
         <h2 class="modal-body-title">
-          The limit of selected items has been reached. Please remove something from favorites and
+          The limit of favorite items has been reached. Please remove something from favorites and
           try again.
         </h2>
 

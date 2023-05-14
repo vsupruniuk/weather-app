@@ -23,7 +23,8 @@ export default defineComponent({
     };
   },
   props: {
-    city: { type: Object as PropType<ICity>, required: true }
+    city: { type: Object as PropType<ICity>, required: true },
+    isFavoritePage: { type: Boolean, required: false, default: false }
   },
   mounted() {
     const { city } = this;
@@ -69,6 +70,7 @@ export default defineComponent({
       :cityName="cityName"
       :isFavorite="city.isFavorite"
       :cityId="city.id"
+      :is-favorite-page="true"
       @addFavorite="addToFavorite"
       @reload-weather="reloadWeather($event)"
     />

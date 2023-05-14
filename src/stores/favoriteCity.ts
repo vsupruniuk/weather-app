@@ -10,9 +10,21 @@ export const useFavoriteCitiesStore = defineStore('favoriteCities', {
   },
   actions: {
     addFavoriteCity(city: ICity) {
-      this.favoriteCities.push({ ...city, id: uuidv4() });
+      this.favoriteCities.push({ ...city, isFavorite: true });
 
       localStorage.setItem('favoriteCities', JSON.stringify(this.favoriteCities));
+    },
+    addFavoriteCities(cities: ICity[]) {
+      this.favoriteCities = this.favoriteCities.concat(cities);
+
+      localStorage.setItem('favoriteCities', JSON.stringify(this.favoriteCities));
+    },
+    deleteCityById(id: string) {
+      const newCities = this.favoriteCities.filter((city) => city.id !== id);
+
+      this.favoriteCities = newCities;
+
+      localStorage.setItem('favoriteCities', JSON.stringify(newCities));
     }
   }
 });

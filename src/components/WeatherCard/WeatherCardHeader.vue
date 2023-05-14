@@ -9,7 +9,8 @@ export default defineComponent({
   props: {
     cityName: { type: String, required: true },
     isFavorite: { type: Boolean, required: true },
-    cityId: { type: String, required: true }
+    cityId: { type: String, required: true },
+    isFavoritePage: { type: Boolean, required: false, default: false }
   },
   methods: {
     addFavorite() {
@@ -29,7 +30,11 @@ export default defineComponent({
       </button>
     </div>
 
-    <AutocompleteInput :cityId="cityId" @reload-weather="$emit('reload-weather', $event)" />
+    <AutocompleteInput
+      v-if="!isFavoritePage"
+      :cityId="cityId"
+      @reload-weather="$emit('reload-weather', $event)"
+    />
   </div>
 </template>
 
