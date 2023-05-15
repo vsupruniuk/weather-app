@@ -4,10 +4,18 @@ import type { IWeatherItem } from '@/types/Weather';
 import moment from 'moment';
 import WeatherDetails from '@/components/WeatherCard/WeatherDetails.vue';
 import WeatherTemperatureGraphic from '@/components/WeatherCard/WeatherTemperatureGraphic.vue';
+import { useTranslationsStore } from '@/stores/translations';
+import 'moment/locale/uk.js';
+import { getTranslation } from '../../helpers/getTranslation';
 
 export default defineComponent({
   name: 'WeatherInfoItem',
   components: { WeatherTemperatureGraphic, WeatherDetails },
+  setup() {
+    const translations = useTranslationsStore();
+
+    return { translations };
+  },
   props: {
     weatherItem: { type: Object as PropType<IWeatherItem[]>, required: true }
   },
@@ -18,7 +26,7 @@ export default defineComponent({
   },
   computed: {
     currentDate() {
-      return moment(this.weatherItem[0].dt * 1000).format('Do MMM');
+      return moment(this.weatherItem[0].dt * 1000).format('D.MM');
     },
     daysWeather() {
       const nightEnd = moment(this.weatherItem[0].dt * 1000)
@@ -45,6 +53,7 @@ export default defineComponent({
     }
   },
   methods: {
+    getTranslation,
     setDayMode() {
       this.dayMode = 'day';
     },
@@ -61,7 +70,7 @@ export default defineComponent({
 
     <div class="control-buttons">
       <button class="btn" :class="{ 'is-active': dayMode === 'day' }" @click="setDayMode">
-        Day
+        {{ getTranslation('translation::card_day_mode_d') }}
       </button>
       <button
         class="btn"
@@ -69,7 +78,7 @@ export default defineComponent({
         @click="setNightMode"
         :disabled="!nightsWeather.length"
       >
-        Night
+        {{ getTranslation('translation::card_day_mode_n') }}
       </button>
     </div>
 

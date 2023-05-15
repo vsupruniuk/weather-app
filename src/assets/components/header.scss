@@ -8,12 +8,31 @@
   border-bottom: 1px solid $color-gray-light;
 
   @include tablet {
-    justify-content: start;
-    gap: 30px;
+    justify-content: space-between;
   }
 
-  @include desktop {
-    gap: 50px;
+  &-nav {
+    display: flex;
+    gap: 15px;
+
+    @include tablet {
+      gap: 30px;
+    }
+
+    @include desktop {
+      gap: 50px;
+    }
+  }
+
+  &-select {
+    width: 70px;
+    padding: 5px;
+    border: 1px solid $color-grey-dark;
+    border-radius: 8px;
+
+    &:focus-visible {
+      outline: none;
+    }
   }
 
   a {

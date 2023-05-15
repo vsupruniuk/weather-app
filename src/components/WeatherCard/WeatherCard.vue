@@ -7,6 +7,7 @@ import WeatherInfo from '@/components/WeatherCard/WeatherInfo.vue';
 import { getWeather } from '@/api/getWeather';
 import { separateWeatherByDays } from '@/helpers/separateWeatherByDays';
 import type { IWeatherItem } from '@/types/Weather';
+import { useTranslationsStore } from '@/stores/translations';
 
 export default defineComponent({
   name: 'WeatherCard',
@@ -14,8 +15,9 @@ export default defineComponent({
   emits: ['toggleFavorites', 'deleteCard', 'openFavoriteLimitModal'],
   setup() {
     const favoriteCities = useFavoriteCitiesStore();
+    const translations = useTranslationsStore();
 
-    return { favoriteCities };
+    return { favoriteCities, translations };
   },
   data() {
     return {
@@ -29,20 +31,21 @@ export default defineComponent({
   mounted() {
     const { city } = this;
 
-    getWeather(city.lat, city.lon)
+    getWeather(city.lat, city.lon, this.translations.locale)
       .then((data) => (this.weather = separateWeatherByDays(data.data)))
       .catch(() => (this.weather = [[]]));
   },
   computed: {
     cityName(): string {
-      const { city } = this;
+      const { city, translations } = this;
+      const localeName = city.local_names[translations.locale];
 
-      return `${city.name}, ${city.country}`;
+      return `${localeName || city.name}, ${city.country}`;
     }
   },
   methods: {
     reloadWeather(city: ICity) {
-      getWeather(city.lat, city.lon)
+      getWeather(city.lat, city.lon, this.translations.locale)
         .then((data) => (this.weather = separateWeatherByDays(data.data)))
         .catch(() => (this.weather = [[]]));
     },
@@ -70,7 +73,7 @@ export default defineComponent({
       :cityName="cityName"
       :isFavorite="city.isFavorite"
       :cityId="city.id"
-      :is-favorite-page="true"
+      :is-favorite-page="isFavoritePage"
       @addFavorite="addToFavorite"
       @reload-weather="reloadWeather($event)"
     />

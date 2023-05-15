@@ -1,9 +1,11 @@
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { capitalize, defineComponent, PropType } from 'vue';
 import type { IWeatherItem } from '@/types/Weather';
+import { getTranslation } from '../../helpers/getTranslation';
 
 export default defineComponent({
   name: 'WeatherDetails',
+  methods: { capitalize, getTranslation },
   props: {
     weatherItem: { type: Object as PropType<IWeatherItem[]>, required: true }
   },
@@ -60,47 +62,51 @@ export default defineComponent({
 <template>
   <div class="weather-details">
     <div class="weather-details-item">
-      <div class="weather-details-title">Max temperature:</div>
+      <div class="weather-details-title">{{ getTranslation('translation::weather_max_temp') }}</div>
       <div>{{ maxTemperature }} &#8451;</div>
     </div>
 
     <div class="weather-details-item">
-      <div class="weather-details-title">Min temperature:</div>
+      <div class="weather-details-title">{{ getTranslation('translation::weather_min_temp') }}</div>
       <div>{{ minTemperature }} &#8451;</div>
     </div>
 
     <div class="weather-details-item">
-      <div class="weather-details-title">Average temperature:</div>
+      <div class="weather-details-title">{{ getTranslation('translation::weather_avg_temp') }}</div>
       <div>{{ averageTemperature }} &#8451;</div>
     </div>
 
     <div class="weather-details-item">
-      <div class="weather-details-title">Feels like:</div>
+      <div class="weather-details-title">
+        {{ getTranslation('translation::weather_feels_like_temp') }}
+      </div>
       <div>{{ averageTemperatureFeelsLike }} &#8451;</div>
     </div>
 
     <br />
 
     <div class="weather-details-item">
-      <div class="weather-details-title">Pressure:</div>
-      <div>{{ averagePressure }} hPa</div>
+      <div class="weather-details-title">{{ getTranslation('translation::weather_pressure') }}</div>
+      <div>{{ averagePressure }} {{ getTranslation('translation::weather_pressure_unit') }}</div>
     </div>
 
     <div class="weather-details-item">
-      <div class="weather-details-title">Humidity:</div>
+      <div class="weather-details-title">{{ getTranslation('translation::weather_humidity') }}</div>
       <div>{{ averageHumidity }} %</div>
     </div>
 
     <div class="weather-details-item">
-      <div class="weather-details-title">Wind speed:</div>
-      <div>{{ averageWindSpeed }} meter/sec</div>
+      <div class="weather-details-title">
+        {{ getTranslation('translation::weather_wind_speed') }}
+      </div>
+      <div>{{ averageWindSpeed }} {{ getTranslation('translation::weather_wind_speed_unit') }}</div>
     </div>
 
     <br />
 
     <div class="weather-details-item">
       <div class="weather-details-title">
-        {{ weatherItem[0].weather[0].main }}, {{ weatherItem[0].weather[0].description }}
+        {{ capitalize(weatherItem[0].weather[0].description) }}
       </div>
     </div>
   </div>

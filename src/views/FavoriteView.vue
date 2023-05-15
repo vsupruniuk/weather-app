@@ -6,6 +6,7 @@ import WeatherCard from '@/components/WeatherCard/WeatherCard.vue';
 import WeatherCardPreloader from '@/components/Preloaders/WeatherCardPreloader.vue';
 import DeletingModal from '@/components/Modals/DeletingModal.vue';
 import { useSelectedCitiesStore } from '@/stores/cities';
+import { getTranslation } from '../helpers/getTranslation';
 
 export default defineComponent({
   components: { DeletingModal, WeatherCardPreloader, WeatherCard },
@@ -41,6 +42,7 @@ export default defineComponent({
     this.isCitiesLoading = false;
   },
   methods: {
+    getTranslation,
     prepareToDeletingCity(id: string) {
       this.isDeletingModalActive = true;
       this.cityIdToDelete = id;
@@ -61,7 +63,9 @@ export default defineComponent({
 
 <template>
   <div class="wrapper">
-    <h1 v-if="!favoriteCities.favoriteCities.length">Favorites list is empty</h1>
+    <h1 v-if="!favoriteCities.favoriteCities.length">
+      {{ getTranslation('translation::favorite_empty') }}
+    </h1>
     <template v-else>
       <WeatherCardPreloader v-if="isCitiesLoading" />
 

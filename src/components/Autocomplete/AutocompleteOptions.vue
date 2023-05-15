@@ -1,10 +1,16 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import type { ICity } from '@/types/City';
+import { useTranslationsStore } from '@/stores/translations';
 
 export default defineComponent({
   name: 'AutocompleteOptions',
   emits: ['selectCity'],
+  setup() {
+    const translation = useTranslationsStore();
+
+    return { translation };
+  },
   props: {
     foundedCities: { type: Object as PropType<ICity[]>, required: true },
     isActive: { type: Boolean, required: true }
@@ -22,7 +28,8 @@ export default defineComponent({
       @click="$emit('selectCity', city)"
       class="autocomplete-options-item"
     >
-      {{ city.name }}, {{ city.country }}
+      {{ (city.local_names && city.local_names[translation.locale]) || city.name }},
+      {{ city.country }}
     </div>
   </div>
 </template>

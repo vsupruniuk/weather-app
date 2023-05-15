@@ -1,9 +1,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import MainModal from '@/components/Modals/MainModal.vue';
+import { getTranslation } from '../../helpers/getTranslation';
 
 export default defineComponent({
   name: 'FavoriteLimitModal',
+  methods: { getTranslation },
   emits: ['closeModal'],
   components: { MainModal }
 });
@@ -20,12 +22,13 @@ export default defineComponent({
 
       <div class="modal-body">
         <h2 class="modal-body-title">
-          The limit of favorite items has been reached. Please remove something from favorites and
-          try again.
+          {{ getTranslation('translation::modal_favorite') }}
         </h2>
 
         <div class="modal-confirmation-buttons">
-          <button class="modal-confirmation-btn btn" @click="$emit('closeModal')">Ok</button>
+          <button class="modal-confirmation-btn btn" @click="$emit('closeModal')">
+            {{ getTranslation('translation::ok') }}
+          </button>
         </div>
       </div>
     </div>

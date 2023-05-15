@@ -1,8 +1,10 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { getTranslation } from '@/helpers/getTranslation';
 
 export default defineComponent({
   name: 'WeatherInfoControl',
+  methods: { getTranslation },
   emits: ['changeMode'],
   props: {
     mode: {
@@ -23,7 +25,7 @@ export default defineComponent({
       :class="{ 'is-active': mode === 'oneDay' }"
       @click="$emit('changeMode', 'oneDay')"
     >
-      1 day
+      {{ getTranslation('translation::card_weather_mode_1') }}
     </button>
 
     <button
@@ -31,7 +33,7 @@ export default defineComponent({
       :class="{ 'is-active': mode === 'fiveDays' }"
       @click="$emit('changeMode', 'fiveDays')"
     >
-      5 days
+      {{ getTranslation('translation::card_weather_mode_5') }}
     </button>
   </div>
 </template>

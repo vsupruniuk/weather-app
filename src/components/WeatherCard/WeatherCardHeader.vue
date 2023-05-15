@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import AutocompleteInput from '@/components/Autocomplete/Autocomplete.vue';
+import { getTranslation } from '@/helpers/getTranslation';
 
 export default defineComponent({
   name: 'WeatherCardHeader',
@@ -13,6 +14,7 @@ export default defineComponent({
     isFavoritePage: { type: Boolean, required: false, default: false }
   },
   methods: {
+    getTranslation,
     addFavorite() {
       this.$emit('addFavorite');
     }
@@ -23,7 +25,7 @@ export default defineComponent({
 <template>
   <div class="card-header">
     <div class="card-header-city">
-      <h3>Selected city: {{ cityName }}</h3>
+      <h3>{{ getTranslation('translation::card_selected_city') }} {{ cityName }}</h3>
       <button class="favorite-status" @click="addFavorite">
         <img v-if="!isFavorite" src="src/img/star.svg" alt="favorite status" />
         <img v-else src="src/img/star-active.svg" alt="favorite status" />

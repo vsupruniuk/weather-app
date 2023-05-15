@@ -4,16 +4,12 @@ import moment from 'moment';
 export const separateWeatherByDays = (weather: IWeather): IWeatherItem[][] => {
   const arr = { ...weather };
   const result: IWeatherItem[][] = [[]];
-  const tomorrow = moment().locale('uk').add(1, 'day').startOf('day');
+  const tomorrow = moment().add(1, 'day').startOf('day');
 
   let isTodayWeatherLeft = true;
 
   while (isTodayWeatherLeft) {
-    if (
-      moment(arr.list[0].dt * 1000)
-        .locale('uk')
-        .isBefore(tomorrow)
-    ) {
+    if (moment(arr.list[0].dt * 1000).isBefore(tomorrow)) {
       result[0].push(...arr.list.splice(0, 1));
     } else {
       isTodayWeatherLeft = false;

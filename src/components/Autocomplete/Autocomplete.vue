@@ -5,6 +5,7 @@ import { searchCities } from '@/api/searchCities';
 import { debounce } from 'lodash';
 import type { ICity } from '@/types/City';
 import { useSelectedCitiesStore } from '@/stores/cities';
+import { getTranslation } from '@/helpers/getTranslation';
 
 export default defineComponent({
   name: 'AutocompleteInput',
@@ -26,6 +27,7 @@ export default defineComponent({
     };
   },
   methods: {
+    getTranslation,
     async fetchData() {
       if (this.inputValue.length) {
         try {
@@ -55,7 +57,7 @@ export default defineComponent({
       <input
         type="text"
         class="autocomplete-input"
-        placeholder="Type to search"
+        :placeholder="getTranslation('translation::city_search_placeholder')"
         v-model="inputValue"
         @input="debouncedFetchData"
       />

@@ -1,9 +1,11 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import MainModal from '@/components/Modals/MainModal.vue';
+import { getTranslation } from '../../helpers/getTranslation';
 
 export default defineComponent({
   name: 'DeletingModal',
+  methods: { getTranslation },
   emits: ['closeModal', 'confirmDelete'],
   components: { MainModal }
 });
@@ -19,11 +21,15 @@ export default defineComponent({
       </div>
 
       <div class="modal-body">
-        <h2 class="modal-body-title">Are you sure you want to delete this city?</h2>
+        <h2 class="modal-body-title">{{ getTranslation('translation::modal_delete') }}</h2>
 
         <div class="modal-confirmation-buttons">
-          <button class="modal-confirmation-btn btn" @click="$emit('confirmDelete')">Yes</button>
-          <button class="modal-confirmation-btn btn" @click="$emit('closeModal')">No</button>
+          <button class="modal-confirmation-btn btn" @click="$emit('confirmDelete')">
+            {{ getTranslation('translation::yes') }}
+          </button>
+          <button class="modal-confirmation-btn btn" @click="$emit('closeModal')">
+            {{ getTranslation('translation::no') }}
+          </button>
         </div>
       </div>
     </div>

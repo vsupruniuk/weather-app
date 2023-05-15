@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import type { ICity } from '@/types/City';
-import { v4 as uuidv4 } from 'uuid';
 
 export const useFavoriteCitiesStore = defineStore('favoriteCities', {
   state(): { favoriteCities: ICity[] } {

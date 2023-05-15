@@ -2,6 +2,7 @@
 import { defineComponent } from 'vue';
 import { Chart } from 'chart.js/auto';
 import moment from 'moment';
+import { getTranslation } from '@/helpers/getTranslation';
 
 export default defineComponent({
   name: 'WeatherTemperatureGraphic',
@@ -25,7 +26,7 @@ export default defineComponent({
         labels: this.labels,
         datasets: [
           {
-            label: 'Temperature by hours',
+            label: getTranslation('translation::weather_temp_graphic'),
             data: this.temperatures,
             borderWidth: 2
           }

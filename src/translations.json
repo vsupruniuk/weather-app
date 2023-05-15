@@ -1,0 +1,98 @@
+{
+  "translation::yes": {
+    "en": "Yes",
+    "uk": "Так"
+  },
+  "translation::no": {
+    "en": "No",
+    "uk": "Ні"
+  },
+  "translation::ok": {
+    "en": "Okay",
+    "uk": "Гаразд"
+  },
+  "translation::header_home": {
+    "en": "Home",
+    "uk": "Домашня"
+  },
+  "translation::header_favorite": {
+    "en": "Favorite",
+    "uk": "Обране"
+  },
+  "translation::card_selected_city": {
+    "en": "Selected city:",
+    "uk": "Обране місто:"
+  },
+  "translation::city_search_placeholder": {
+    "en": "Type to search",
+    "uk": "Введіть для пошуку"
+  },
+  "translation::card_weather_mode_1": {
+    "en": "1 day",
+    "uk": "1 день"
+  },
+  "translation::card_weather_mode_5": {
+    "en": "5 days",
+    "uk": "5 днів"
+  },
+  "translation::card_day_mode_d": {
+    "en": "Day",
+    "uk": "День"
+  },
+  "translation::card_day_mode_n": {
+    "en": "Night",
+    "uk": "Ніч"
+  },
+  "translation::weather_max_temp": {
+    "en": "Max temperature:",
+    "uk": "Макс темпреатура:"
+  },
+  "translation::weather_min_temp": {
+    "en": "Min temperature:",
+    "uk": "Мін темпреатура:"
+  },
+  "translation::weather_avg_temp": {
+    "en": "Average temperature:",
+    "uk": "Середня температура:"
+  },
+  "translation::weather_feels_like_temp": {
+    "en": "Feels like:",
+    "uk": "Відчувається як:"
+  },
+  "translation::weather_pressure": {
+    "en": "Pressure:",
+    "uk": "Тиск:"
+  },
+  "translation::weather_pressure_unit": {
+    "en": "hPa",
+    "uk": "гПа"
+  },
+  "translation::weather_humidity": {
+    "en": "Humidity:",
+    "uk": "Вологість:"
+  },
+  "translation::weather_wind_speed": {
+    "en": "Wind speed:",
+    "uk": "Швидкість вітру:"
+  },
+  "translation::weather_wind_speed_unit": {
+    "en": "meter/sec",
+    "uk": "м/с"
+  },
+  "translation::weather_temp_graphic": {
+    "en": "Temperature by hours",
+    "uk": "Температура по годинах"
+  },
+  "translation::modal_delete": {
+    "en": "Are you sure you want to delete this city?",
+    "uk": "Ви впевнені що хочете видалити це місто?"
+  },
+  "translation::modal_favorite": {
+    "en": "The limit of favorite items has been reached. Please remove something from favorites and try again.",
+    "uk": "Досягнуто ліміт обраного. Будь ласка видаліть щось зі списку обраного та спробуйте знову."
+  },
+  "translation::favorite_empty": {
+    "en": "Favorites list is empty",
+    "uk": "Список обраного порожній"
+  }
+}

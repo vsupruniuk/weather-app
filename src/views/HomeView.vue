@@ -9,6 +9,7 @@ import { cityMock } from '@/mocks/city';
 import DeletingModal from '@/components/Modals/DeletingModal.vue';
 import FavoriteLimitModal from '@/components/Modals/FavoriteLimitModal.vue';
 import WeatherCardPreloader from '@/components/Preloaders/WeatherCardPreloader.vue';
+import { searchCities } from '@/api/searchCities';
 
 export default defineComponent({
   components: { WeatherCardPreloader, FavoriteLimitModal, DeletingModal, WeatherCard },
