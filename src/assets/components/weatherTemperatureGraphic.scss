@@ -1,0 +1,14 @@
+.temperature-graphic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-top: 1px solid $color-gray-light;
+  padding-top: 10px;
+  width: 100%;
+
+  #chart {
+    max-height: 600px;
+    max-width: 1000px;
+  }
+}

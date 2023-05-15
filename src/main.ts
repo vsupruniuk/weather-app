@@ -1,12 +1,16 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import { createApp } from 'vue';
+import { createPinia } from 'pinia';
+import VueCookies from 'vue-cookies';
 
-import router from './router'
-import App from './App.vue'
+import router from './router';
+import App from './App.vue';
 
-const app = createApp(App)
+import './assets/index.scss';
 
-app.use(createPinia())
-app.use(router)
+const app = createApp(App);
 
-app.mount('#app')
+app.use(createPinia());
+app.use(router);
+app.use(VueCookies);
+
+app.mount('#app');

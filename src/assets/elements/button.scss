@@ -1,0 +1,40 @@
+.btn {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
+  height: 36px;
+  width: 120px;
+
+  border: 2px solid $color-blue;
+  border-radius: 8px;
+
+  color: $color-blue;
+  line-height: 36px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: background-color 250ms, border-color 250ms;
+
+  &:hover {
+    background-color: $color-blue-light;
+  }
+
+  &:disabled {
+    border-color: $color-grey-dark;
+    color: $color-grey-dark;
+    background-color: $color-gray-thin;
+    cursor: default;
+  }
+
+  &.is-active {
+    color: $color-white;
+    background-color: $color-blue;
+
+    &:hover {
+      background-color: $color-blue-dark;
+      border-color: $color-blue-dark;
+    }
+  }
+}
