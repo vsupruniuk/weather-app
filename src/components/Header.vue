@@ -25,6 +25,7 @@ export default defineComponent({
       const locale = (event.target as HTMLSelectElement).value;
       this.setLocale(locale as Locale);
       this.$cookies.set('locale', locale, Number(import.meta.env.VITE_COOKIE_LOCALE_EXPIRE_TIME));
+      location.reload();
     }
   }
 });
