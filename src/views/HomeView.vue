@@ -123,7 +123,7 @@ export default defineComponent({
 
       <div v-if="cities.cities.length < 5" class="add-button" @click="addCity">
         <button class="btn">
-          <img src="src/img/plus.svg" alt="add" />
+          <img src="../img/plus.svg" alt="add" />
         </button>
       </div>
 
