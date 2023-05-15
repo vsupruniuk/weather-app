@@ -16,7 +16,7 @@ export default defineComponent({
     <div class="modal-card">
       <div class="modal-header">
         <button class="modal-close-btn" @click="$emit('closeModal')">
-          <img src="src/img/close.svg" alt="close" />
+          <img src="../../img/close.svg" alt="close" />
         </button>
       </div>
 
