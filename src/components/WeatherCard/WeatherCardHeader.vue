@@ -27,8 +27,8 @@ export default defineComponent({
     <div class="card-header-city">
       <h3>{{ getTranslation('translation::card_selected_city') }} {{ cityName }}</h3>
       <button class="favorite-status" @click="addFavorite">
-        <img v-if="!isFavorite" src="src/img/star.svg" alt="favorite status" />
-        <img v-else src="src/img/star-active.svg" alt="favorite status" />
+        <img v-if="!isFavorite" src="../../img/star.svg" alt="favorite status" />
+        <img v-else src="../../img/star-active.svg" alt="favorite status" />
       </button>
     </div>
 

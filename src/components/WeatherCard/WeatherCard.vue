@@ -82,7 +82,7 @@ export default defineComponent({
 
     <div class="weather-card-delete">
       <button @click="$emit('deleteCard', city.id)">
-        <img src="src/img/trash.svg" alt="delete" />
+        <img src="../../img/trash.svg" alt="delete" />
       </button>
     </div>
   </div>
