@@ -1,7 +1,7 @@
 <script lang="ts">
 import { capitalize, defineComponent, PropType } from 'vue';
 import type { IWeatherItem } from '@/types/Weather';
-import { getTranslation } from '../../helpers/getTranslation';
+import { getTranslation } from '@/helpers/getTranslation';
 
 export default defineComponent({
   name: 'WeatherDetails',
@@ -10,45 +10,45 @@ export default defineComponent({
     weatherItem: { type: Object as PropType<IWeatherItem[]>, required: true }
   },
   computed: {
-    maxTemperature() {
+    maxTemperature(): number {
       const temp = this.weatherItem.map((item) => item.main.temp_max);
 
       return Math.round(Math.max(...temp));
     },
-    minTemperature() {
+    minTemperature(): number {
       const temp = this.weatherItem.map((item) => item.main.temp_min);
 
       return Math.round(Math.min(...temp));
     },
-    averageTemperature() {
+    averageTemperature(): number {
       const temp = this.weatherItem.reduce((previousValue, currentValue) => {
         return previousValue + currentValue.main.temp;
       }, 0);
 
       return Math.round(temp / this.weatherItem.length);
     },
-    averageTemperatureFeelsLike() {
+    averageTemperatureFeelsLike(): number {
       const temp = this.weatherItem.reduce((previousValue, currentValue) => {
         return previousValue + currentValue.main.feels_like;
       }, 0);
 
       return Math.round(temp / this.weatherItem.length);
     },
-    averagePressure() {
+    averagePressure(): number {
       const pressure = this.weatherItem.reduce((previousValue, currentValue) => {
         return previousValue + currentValue.main.pressure;
       }, 0);
 
       return Math.round(pressure / this.weatherItem.length);
     },
-    averageHumidity() {
+    averageHumidity(): number {
       const humidity = this.weatherItem.reduce((previousValue, currentValue) => {
         return previousValue + currentValue.main.humidity;
       }, 0);
 
       return Math.round(humidity / this.weatherItem.length);
     },
-    averageWindSpeed() {
+    averageWindSpeed(): number {
       const wind = this.weatherItem.reduce((previousValue, currentValue) => {
         return previousValue + currentValue.wind.speed;
       }, 0);
@@ -111,5 +111,3 @@ export default defineComponent({
     </div>
   </div>
 </template>
-
-<style></style>

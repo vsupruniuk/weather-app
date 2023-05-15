@@ -44,12 +44,12 @@ export default defineComponent({
     }
   },
   methods: {
-    reloadWeather(city: ICity) {
+    reloadWeather(city: ICity): void {
       getWeather(city.lat, city.lon, this.translations.locale)
         .then((data) => (this.weather = separateWeatherByDays(data.data)))
         .catch(() => (this.weather = [[]]));
     },
-    addToFavorite() {
+    addToFavorite(): void {
       if (this.city.isFavorite) {
         return;
       }
@@ -87,5 +87,3 @@ export default defineComponent({
     </div>
   </div>
 </template>
-
-<style></style>

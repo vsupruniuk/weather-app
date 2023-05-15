@@ -15,16 +15,16 @@ export default defineComponent({
     this.setLocale(this.$cookies.get('locale') || 'en');
   },
   computed: {
-    currentUrl() {
+    currentUrl(): string {
       return this.$route.path;
     }
   },
   methods: {
     getTranslation,
-    changeLocale(event: Event) {
+    changeLocale(event: Event): void {
       const locale = (event.target as HTMLSelectElement).value;
       this.setLocale(locale as Locale);
-      this.$cookies.set('locale', locale);
+      this.$cookies.set('locale', locale, Number(import.meta.env.VITE_COOKIE_LOCALE_EXPIRE_TIME));
     }
   }
 });
@@ -51,5 +51,3 @@ export default defineComponent({
     </select>
   </header>
 </template>
-
-<style></style>

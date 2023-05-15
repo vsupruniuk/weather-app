@@ -6,7 +6,7 @@ import WeatherCard from '@/components/WeatherCard/WeatherCard.vue';
 import WeatherCardPreloader from '@/components/Preloaders/WeatherCardPreloader.vue';
 import DeletingModal from '@/components/Modals/DeletingModal.vue';
 import { useSelectedCitiesStore } from '@/stores/cities';
-import { getTranslation } from '../helpers/getTranslation';
+import { getTranslation } from '@/helpers/getTranslation';
 
 export default defineComponent({
   components: { DeletingModal, WeatherCardPreloader, WeatherCard },
@@ -43,15 +43,15 @@ export default defineComponent({
   },
   methods: {
     getTranslation,
-    prepareToDeletingCity(id: string) {
+    prepareToDeletingCity(id: string): void {
       this.isDeletingModalActive = true;
       this.cityIdToDelete = id;
     },
-    closeModal() {
+    closeModal(): void {
       this.isDeletingModalActive = false;
       this.cityIdToDelete = '';
     },
-    deleteSelectedCity() {
+    deleteSelectedCity(): void {
       this.favoriteCities.deleteCityById(this.cityIdToDelete);
       this.cities.untoggleFavorite(this.cityIdToDelete);
       this.isDeletingModalActive = false;
@@ -87,5 +87,3 @@ export default defineComponent({
     </template>
   </div>
 </template>
-
-<style></style>

@@ -28,7 +28,7 @@ export default defineComponent({
   },
   methods: {
     getTranslation,
-    async fetchData() {
+    async fetchData(): Promise<void> {
       if (this.inputValue.length) {
         try {
           const data = await searchCities(this.inputValue);
@@ -41,7 +41,7 @@ export default defineComponent({
         this.foundedCities = [];
       }
     },
-    replaceCity(event) {
+    replaceCity(event): void {
       this.cities.replaceCityById(this.cityId, event);
       this.inputValue = '';
       this.foundedCities = [];
@@ -70,5 +70,3 @@ export default defineComponent({
     </div>
   </form>
 </template>
-
-<style></style>

@@ -5,8 +5,7 @@ import moment from 'moment';
 import WeatherDetails from '@/components/WeatherCard/WeatherDetails.vue';
 import WeatherTemperatureGraphic from '@/components/WeatherCard/WeatherTemperatureGraphic.vue';
 import { useTranslationsStore } from '@/stores/translations';
-import 'moment/locale/uk.js';
-import { getTranslation } from '../../helpers/getTranslation';
+import { getTranslation } from '@/helpers/getTranslation';
 
 export default defineComponent({
   name: 'WeatherInfoItem',
@@ -25,17 +24,17 @@ export default defineComponent({
     };
   },
   computed: {
-    currentDate() {
+    currentDate(): string {
       return moment(this.weatherItem[0].dt * 1000).format('D.MM');
     },
-    daysWeather() {
+    daysWeather(): IWeatherItem[] {
       const nightEnd = moment(this.weatherItem[0].dt * 1000)
         .startOf('day')
         .hour(6);
 
       return this.weatherItem.filter((item) => moment(item.dt * 1000).isAfter(nightEnd));
     },
-    nightsWeather() {
+    nightsWeather(): IWeatherItem[] {
       const nightStart = moment(this.weatherItem[0].dt * 1000).startOf('day');
       const nightEnd = moment(this.weatherItem[0].dt * 1000)
         .startOf('day')
@@ -54,10 +53,10 @@ export default defineComponent({
   },
   methods: {
     getTranslation,
-    setDayMode() {
+    setDayMode(): void {
       this.dayMode = 'day';
     },
-    setNightMode() {
+    setNightMode(): void {
       this.dayMode = 'night';
     }
   }
@@ -87,5 +86,3 @@ export default defineComponent({
     <WeatherTemperatureGraphic :weather-item="weatherItem" />
   </div>
 </template>
-
-<style></style>

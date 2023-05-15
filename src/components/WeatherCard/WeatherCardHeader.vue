@@ -15,7 +15,7 @@ export default defineComponent({
   },
   methods: {
     getTranslation,
-    addFavorite() {
+    addFavorite(): void {
       this.$emit('addFavorite');
     }
   }
@@ -39,5 +39,3 @@ export default defineComponent({
     />
   </div>
 </template>
-
-<style></style>

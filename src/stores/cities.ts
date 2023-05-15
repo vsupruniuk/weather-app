@@ -45,7 +45,7 @@ export const useSelectedCitiesStore = defineStore('selectedCities', {
 
       localStorage.setItem('selectedCities', JSON.stringify(newCities));
     },
-    deleteCityById(id: string) {
+    deleteCityById(id: string): void {
       const newCities = this.cities.filter((city) => city.id !== id);
 
       this.cities = newCities;

@@ -1,7 +1,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import MainModal from '@/components/Modals/MainModal.vue';
-import { getTranslation } from '../../helpers/getTranslation';
+import { getTranslation } from '@/helpers/getTranslation';
 
 export default defineComponent({
   name: 'DeletingModal',
@@ -35,5 +35,3 @@ export default defineComponent({
     </div>
   </MainModal>
 </template>
-
-<style></style>

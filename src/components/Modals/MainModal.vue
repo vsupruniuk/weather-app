@@ -17,5 +17,3 @@ export default defineComponent({
     <slot></slot>
   </div>
 </template>
-
-<style></style>

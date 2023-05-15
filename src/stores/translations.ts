@@ -10,7 +10,7 @@ export const useTranslationsStore = defineStore('translations', {
     };
   },
   actions: {
-    setLocale(locale: Locale) {
+    setLocale(locale: Locale): void {
       this.locale = locale;
     }
   }

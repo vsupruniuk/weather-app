@@ -9,7 +9,6 @@ import { cityMock } from '@/mocks/city';
 import DeletingModal from '@/components/Modals/DeletingModal.vue';
 import FavoriteLimitModal from '@/components/Modals/FavoriteLimitModal.vue';
 import WeatherCardPreloader from '@/components/Preloaders/WeatherCardPreloader.vue';
-import { searchCities } from '@/api/searchCities';
 
 export default defineComponent({
   components: { WeatherCardPreloader, FavoriteLimitModal, DeletingModal, WeatherCard },
@@ -70,7 +69,7 @@ export default defineComponent({
     }
   },
   methods: {
-    addCity() {
+    addCity(): void {
       getCityByIP()
         .then(({ data }: { data: ICityByIP }) => {
           this.cities.addCity({
@@ -90,16 +89,16 @@ export default defineComponent({
           });
         });
     },
-    prepareToDeletingCity(id: string) {
+    prepareToDeletingCity(id: string): void {
       this.isDeletingModalActive = true;
       this.cityIdToDelete = id;
     },
-    closeModal() {
+    closeModal(): void {
       this.isDeletingModalActive = false;
       this.isFavoriteLimitModalActive = false;
       this.cityIdToDelete = '';
     },
-    deleteSelectedCity() {
+    deleteSelectedCity(): void {
       this.cities.deleteCityById(this.cityIdToDelete);
       this.isDeletingModalActive = false;
       this.cityIdToDelete = '';

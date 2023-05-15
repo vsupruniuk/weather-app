@@ -49,5 +49,3 @@ export default defineComponent({
     <canvas ref="chart" id="chart" width="400" height="400"></canvas>
   </div>
 </template>
-
-<style></style>

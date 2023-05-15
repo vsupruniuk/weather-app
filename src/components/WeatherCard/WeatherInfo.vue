@@ -37,5 +37,3 @@ export default defineComponent({
     </template>
   </div>
 </template>
-
-<style></style>
